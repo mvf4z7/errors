@@ -1,0 +1,24 @@
+{
+  "name": "wrapped-error",
+  "version": "0.0.1",
+  "description": "A class for wrapping JavaScript errors.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --ignore-unknown --write *",
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "typescript": "^4.2.4"
+  },
+  "lint-staged": {
+    "**/*": "npm run format"
+  }
+}
