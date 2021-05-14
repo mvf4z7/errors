@@ -1,3 +1,3 @@
-const log = () => {
+export const log = (): void => {
   console.log('hello');
 };
