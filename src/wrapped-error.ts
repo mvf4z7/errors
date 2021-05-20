@@ -11,19 +11,27 @@ export class WrappedError extends Error {
 
     Object.defineProperty(this, 'stack', {
       get: () =>
-        `${this.getStack.call(this)}\nCaused by: ${
-          this.causedBy.stack ?? '<stack unavailable>'
-        }`,
+        `${this.getOwnStack.call(this)}${this.getCausedByStack(this.causedBy)}`,
     });
   }
 
-  private getStack(): string {
+  private getOwnStack(): string {
     if (!this.stackDescriptor) {
       return `${this.name}: ${this.message}`;
     }
 
-    return this.stackDescriptor.get
+    let stack = this.stackDescriptor.get
       ? this.stackDescriptor.get()
       : this.stackDescriptor.value;
+
+    if (this.name !== 'WrappedError' && stack.indexOf('WrappedError') === 0) {
+      stack = stack.replace('WrappedError', this.name);
+    }
+
+    return stack;
+  }
+
+  private getCausedByStack(error: Error): string {
+    return `\nCaused by: ${error.stack ?? '<stack unavailable>'}`;
   }
 }
