@@ -1,3 +1,1 @@
-export const log = (): void => {
-  console.log('hello');
-};
+export { WrappedError } from './wrapped-error';
