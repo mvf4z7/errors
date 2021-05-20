@@ -33,4 +33,41 @@ describe(WrappedError.name, () => {
       expect(wrappedError.stack).toContain(`Caused by: ${errorToWrap!.stack}`);
     }
   });
+
+  test('should properly format stack traces when WrappedError errors are nested', () => {
+    const originalError = new Error('Original error');
+    const wrappedInner = new WrappedError('Inner context', originalError);
+    const wrappedOuter = new WrappedError('Outer context', wrappedInner);
+
+    const outerContextIndex = Number(
+      wrappedOuter.stack?.indexOf('WrappedError: Outer context')
+    );
+    const innerContextIndex = Number(
+      wrappedOuter.stack?.indexOf('Caused by: WrappedError: Inner context')
+    );
+    const originalErrorContextIndex = Number(
+      wrappedOuter.stack?.indexOf('Caused by: Error: Original error')
+    );
+
+    expect(outerContextIndex).toBe(0);
+    expect(innerContextIndex).toBeGreaterThan(outerContextIndex);
+    expect(originalErrorContextIndex).toBeGreaterThan(innerContextIndex);
+  });
+
+  test('should be able to be extended', () => {
+    class CustomWrappedError extends WrappedError {
+      constructor(causedBy: Error) {
+        super('A custom error message', causedBy);
+        this.name = 'CustomWrappedError';
+      }
+    }
+
+    const originalError = new Error('Original error');
+    const customWrappedError = new CustomWrappedError(originalError);
+
+    expect(customWrappedError.stack?.indexOf('CustomWrappedError:')).toBe(0);
+    expect(
+      customWrappedError.stack?.indexOf('Caused by: Error: Original error')
+    ).toBeGreaterThan(0);
+  });
 });
