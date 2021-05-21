@@ -15,6 +15,10 @@ export class WrappedError extends Error {
     });
   }
 
+  private getCausedByStack(error: Error): string {
+    return `\nCaused by: ${error.stack ?? '<stack unavailable>'}`;
+  }
+
   private getOwnStack(): string {
     if (!this.stackDescriptor) {
       return `${this.name}: ${this.message}`;
@@ -29,9 +33,5 @@ export class WrappedError extends Error {
     }
 
     return stack;
-  }
-
-  private getCausedByStack(error: Error): string {
-    return `\nCaused by: ${error.stack ?? '<stack unavailable>'}`;
   }
 }
