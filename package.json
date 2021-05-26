@@ -14,7 +14,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "author": "Mike Fanger",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
