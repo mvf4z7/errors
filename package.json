@@ -1,6 +1,6 @@
 {
   "name": "@mvf4z7/errors",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of utilities for working with JavaScript and TypeScript Error objects.",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
