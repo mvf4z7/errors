@@ -1,7 +1,7 @@
 {
-  "name": "wrapped-error",
+  "name": "errors",
   "version": "0.0.1",
-  "description": "A class for wrapping JavaScript errors.",
+  "description": "A collection of utilities for working with JavaScript and TypeScript Error objects.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -13,7 +13,7 @@
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "",
+  "author": "Mike Fanger",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^26.0.23",
