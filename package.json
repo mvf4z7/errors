@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf lib/*",
     "format": "prettier --ignore-unknown --write *",
     "lint": "eslint src --ext .js,.ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
@@ -15,6 +16,9 @@
   },
   "author": "Mike Fanger",
   "license": "MIT",
+  "files": [
+    "/lib"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
