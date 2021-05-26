@@ -1,16 +1,20 @@
 {
-  "name": "errors",
+  "name": "@mvf4z7/errors",
   "version": "0.0.1",
   "description": "A collection of utilities for working with JavaScript and TypeScript Error objects.",
-  "main": "lib/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "clean": "rm -rf lib/*",
     "format": "prettier --ignore-unknown --write *",
     "lint": "eslint src --ext .js,.ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
+    "prepublishOnly": "npm run test && npm run clean && npm run build",
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch"
   },
